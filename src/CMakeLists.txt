@@ -1,19 +1,18 @@
-option(USE_LIB_1 "Enable compilation of LIB1" ON)
-option(USE_LIB_2 "Enable compilation of LIB2" OFF)
+option(USE_FACTORIAL "Enable compilation of FACTORIAL" ON)
+option(USE_PRIME "Enable compilation of PRIME" ON)
 
 # lib1
-if(USE_LIB_1)
-  message("Using lib1")
-  add_subdirectory(lib1)
+if(USE_FACTORIAL)
+  message("Using FACT")
+  add_subdirectory(factorial)
 endif()
 
 # lib2
-if(USE_LIB_1)
-  message("Using lib2")
-  add_subdirectory(lib2)
+if(USE_PRIME)
+  message("Using PRIME")
+  add_subdirectory(prime)
 endif()
 
-find_package(fmt)
 find_package(spdlog)
 find_package(docopt)
 
@@ -21,8 +20,9 @@ find_package(docopt)
 add_executable(intro main.cpp)
 target_link_libraries(
   intro
-  PRIVATE project_options
+  PUBLIC project_options
           project_warnings
+          fact
+          prime
           docopt::docopt
-          fmt::fmt
           spdlog::spdlog)
