@@ -62,7 +62,7 @@ endif()
 
 
 # Unit Testing
-option(ENABLE_TESTING "Enable Test Builds" OFF)
+option(ENABLE_TESTING "Enable Test Builds" ON)
 if(ENABLE_TESTING)
   enable_testing()
   message("Building Tests")
