@@ -1,12 +1,10 @@
 #!bin/bash
 
 # Build Esstentials
-sudo apt install build-essential make
+sudo apt install build-essential make clang
 
 # CMake
 sudo apt-get install cmake
-
-# CMake GUI
 sudo apt-get install cmake-gui
 
 # Doxygen
@@ -18,3 +16,4 @@ sudo apt-get install ccache
 
 # CppCheck
 sudo apt-get install cppcheck
+sudo apt-get install cppcheck-gui
