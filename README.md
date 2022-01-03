@@ -5,7 +5,21 @@ Template Project for C++ with CMake
 Personal Fork of https://github.com/cpp-best-practices/cpp_starter_project
 
 
-### Guide
+### Tools and Required Software
+Before the project template can be used, you should check that all the necessary softwares and tools are installed.
+To do this on linux ubuntu, there are two scripts:
+
+1. For installing conan
+```Bash
+scripts/conan_install.sh
+```
+
+2. For Installing the oter Cpp tools
+```Bash
+scripts/cpp_tools_install.sh
+```
+
+### Guide to Customize the Template Project
 
 1. Open CMakeLists.txt in the root folder and change the project name
 
