@@ -24,7 +24,8 @@ for:
     matrix:
       only:
       - image: Visual Studio 2019
-    PYTHON: "C:\\Python38-x64\\python.exe"
+    environment:
+      PYTHON: "C:\\Python38-x64\\python.exe"
     clone_folder: c:\projects\source
     build_script:
         - cmd: |
