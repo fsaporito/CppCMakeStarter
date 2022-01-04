@@ -14,21 +14,21 @@ for:
     matrix:
       only:
       - image: Ubuntu
-      install:
-        py -m pip install --user conan
-      build_script:
-        - cmd: |
-            cmake -S /home/appveyor/source -B ./build
-            cmake --build ./build
+    install:
+      py -m pip install --user conan
+    build_script:
+      - cmd: |
+          cmake -S /home/appveyor/source -B ./build
+          cmake --build ./build
   -
     matrix:
       only:
       - image: Visual Studio 2019
-      PYTHON: "C:\\Python38-x64\\python.exe"
-      clone_folder: c:\projects\source
-      build_script:
-          - cmd: |
-              set PATH=%PATH%;C:\Users\appveyor\AppData\Roaming\Python\Python38\Scripts
-              "%PYTHON%" -m pip install --user conan
-              cmake -S c:\projects\source -B ./build -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE:STRING=Release
-              cmake --build ./build --config "Release"
+    PYTHON: "C:\\Python38-x64\\python.exe"
+    clone_folder: c:\projects\source
+    build_script:
+        - cmd: |
+            set PATH=%PATH%;C:\Users\appveyor\AppData\Roaming\Python\Python38\Scripts
+            "%PYTHON%" -m pip install --user conan
+            cmake -S c:\projects\source -B ./build -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE:STRING=Release
+            cmake --build ./build --config "Release"
