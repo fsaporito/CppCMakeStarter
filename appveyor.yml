@@ -21,10 +21,10 @@ for:
     clone_folder: ~/source
     install:
     - sudo apt-get update
-    #- sudo apt-get install ccache
-    - sudo apt-get --yes install python3-pip
-    - python3 --version
-    - python3 -m pip install --user conan
+    #- sudo apt-get --yes install ccache
+    - sudo apt-get --yes install pip
+    - pip install --user conan
+    - conan --version
     build_script:
       - cmake -S ~/source -B ./build
       - cmake --build ./build
