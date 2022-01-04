@@ -1,6 +1,7 @@
 image:
   - Visual Studio 2019
   - Ubuntu
+  - macos
 #platform:
 #  - x86
 #  - x64
@@ -10,14 +11,36 @@ for:
   -
     matrix:
       only:
-      - image: Ubuntu
+      - image: Ubuntu  
+    environment:
+      matrix:
+        - COMPILER: GCC
+        - COMPILER: Clang
     configuration:
       - Release
+    clone_folder: ~/source
     install:
       py -m pip install --user conan
     build_script:
       - cmd: |
-          cmake -S /home/appveyor/source -B ./build
+          cmake -S ~/source -B ./build
+          cmake --build ./build
+  -
+    matrix:
+      only:
+      - image: macos      
+    environment:
+      matrix:
+        - COMPILER: GCC
+        - COMPILER: Clang
+    configuration:
+      - Release
+    clone_folder: ~/source
+    install:
+      py -m pip install --user conan
+    build_script:
+      - cmd: |
+          cmake -S ~/source -B ./build
           cmake --build ./build
   -
     matrix:
