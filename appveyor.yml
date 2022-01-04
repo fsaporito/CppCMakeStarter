@@ -1,5 +1,5 @@
 image:  
-  - Ubuntu
+  - Ubuntu2004
   - macos
   - Visual Studio 2019
 #platform:
@@ -11,7 +11,7 @@ for:
   -
     matrix:
       only:
-      - image: Ubuntu  
+      - image: Ubuntu2004  
     environment:
       matrix:
         - COMPILER: GCC
@@ -20,7 +20,9 @@ for:
       - Release
     clone_folder: ~/source
     install:
-      python -m pip install --user conan
+    - python --version
+    - python3 --version
+    - python -m pip install --user conan
     build_script:
       - cmake -S ~/source -B ./build
       - cmake --build ./build
