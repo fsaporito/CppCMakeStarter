@@ -1,7 +1,7 @@
-image:
-  - Visual Studio 2019
+image:  
   - Ubuntu
   - macos
+  - Visual Studio 2019
 #platform:
 #  - x86
 #  - x64
@@ -20,7 +20,7 @@ for:
       - Release
     clone_folder: ~/source
     install:
-      python3 -m pip install --user conan
+      python -m pip install --user conan
     build_script:
       - cmd: |
           cmake -S ~/source -B ./build
@@ -37,7 +37,7 @@ for:
       - Release
     clone_folder: ~/source
     install:
-      python3 -m pip install --user conan
+      python -m pip install --user conan
     build_script:
       - cmd: |
           cmake -S ~/source -B ./build
