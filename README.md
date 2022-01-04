@@ -2,7 +2,11 @@
 Template Project for C++ with CMake
 
 ====
-Personal Fork of https://github.com/cpp-best-practices/cpp_starter_project
+Cpp Template Project for Crossplatform development.
+
+Got ideas and tricks from
+https://github.com/cpp-best-practices/cpp_starter_project
+https://github.com/aminya/setup-cpp
 
 
 ### Tools and Required Software
