@@ -20,6 +20,8 @@ for:
       - Release
     clone_folder: ~/source
     install:
+    - sudo apt-get update
+    - sudo apt-get install ccache
     - python --version
     - python3 --version
     - python -m pip install --user conan
