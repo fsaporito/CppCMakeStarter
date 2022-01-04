@@ -20,7 +20,7 @@ for:
       - Release
     clone_folder: ~/source
     install:
-      py -m pip install --user conan
+      python3 -m pip install --user conan
     build_script:
       - cmd: |
           cmake -S ~/source -B ./build
@@ -37,7 +37,7 @@ for:
       - Release
     clone_folder: ~/source
     install:
-      py -m pip install --user conan
+      python3 -m pip install --user conan
     build_script:
       - cmd: |
           cmake -S ~/source -B ./build
