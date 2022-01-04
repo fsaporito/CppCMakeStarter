@@ -1,12 +1,9 @@
 image:
   - Visual Studio 2019
   - Ubuntu
-platform:
-  - x86
-  - x64
-configuration:
-  - Debug
-  - Release
+#platform:
+#  - x86
+#  - x64
 test_script:
   - cmd: cd build && ctest -C Debug
 for:
@@ -14,6 +11,8 @@ for:
     matrix:
       only:
       - image: Ubuntu
+    configuration:
+      - Release
     install:
       py -m pip install --user conan
     build_script:
@@ -24,6 +23,9 @@ for:
     matrix:
       only:
       - image: Visual Studio 2019
+    configuration:
+      - Debug
+      - Release
     environment:
       PYTHON: "C:\\Python38-x64\\python.exe"
     clone_folder: c:\projects\source
