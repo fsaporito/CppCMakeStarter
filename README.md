@@ -8,6 +8,9 @@ Got ideas and tricks from
 https://github.com/cpp-best-practices/cpp_starter_project
 https://github.com/aminya/setup-cpp
 
+CMake/C++ QuickStart at C++Weekly: https://www.youtube.com/watch?v=YbgH7yat-Jo
+GIt, CMake and Conan Talk at CppCon 2018: https://www.youtube.com/watch?v=S4QSKLXdTtA
+Effective CMake at CppNow 2017: https://www.youtube.com/watch?v=bsXLMQ6WgIk
 
 ### Tools and Required Software
 Before the project template can be used, you should check that all the necessary softwares and tools are installed.
