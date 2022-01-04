@@ -22,7 +22,7 @@ for:
     install:
     - sudo apt-get update
     #- sudo apt-get install ccache
-    - sudo apt-get install python3-pip --y --force-yes
+    - sudo apt-get --yes install python3-pip
     - python3 --version
     - python3 -m pip install --user conan
     build_script:
