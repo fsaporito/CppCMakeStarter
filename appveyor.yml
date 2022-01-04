@@ -1,19 +1,23 @@
-image:
-  - Visual Studio 2019
-clone_folder: c:\projects\cpp_project
-
 environment:
-    PYTHON: "C:\\Python38-x64\\python.exe"
-
-build_script:
-- cmd: >-
-    set PATH=%PATH%;C:\Users\appveyor\AppData\Roaming\Python\Python38\Scripts
-
-    "%PYTHON%" -m pip install --user conan
-
-    cmake -S c:\projects\cpp_project -B ./build -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE:STRING=Release
-
-    cmake --build ./build --config "Release"
-
-test_script:
-- cmd: cd build && ctest -C Debug
+  matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      PYTHON: "C:\\Python38-x64\\python.exe"
+      clone_folder: c:\projects\source
+      build_script:
+          - cmd: |
+              set PATH=%PATH%;C:\Users\appveyor\AppData\Roaming\Python\Python38\Scripts
+              "%PYTHON%" -m pip install --user conan
+              cmake -S c:\projects\source -B ./build -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE:STRING=Release
+              cmake --build ./build --config "Release"
+      test_script:
+        - cmd: cd build && ctest -C Debug
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+      clone_folder: /home/appveyor/source
+      install:
+        py -m pip install --user conan
+      build_script:
+        - cmd: |
+            cmake -S /home/appveyor/source -B ./build
+            cmake --build ./build
+      test_script:
+        - cmd: cd build && ctest -C Debug
