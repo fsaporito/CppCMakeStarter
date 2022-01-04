@@ -22,9 +22,8 @@ for:
     install:
       python -m pip install --user conan
     build_script:
-      - cmd: |
-          cmake -S ~/source -B ./build
-          cmake --build ./build
+      - cmake -S ~/source -B ./build
+      - cmake --build ./build
   -
     matrix:
       only:
@@ -39,9 +38,8 @@ for:
     install:
       python -m pip install --user conan
     build_script:
-      - cmd: |
-          cmake -S ~/source -B ./build
-          cmake --build ./build
+      - cmake -S ~/source -B ./build
+      - cmake --build ./build
   -
     matrix:
       only:
