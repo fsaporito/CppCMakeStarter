@@ -27,7 +27,7 @@ for:
     #- python3 -m pip install conan
     - python -m pip install conan
     - echo "Path before is $PATH "
-    - echo "export PATH=/home/appveyor/.local/bin:\${PATH}" >> ~/.bashrc
+    - export PATH=/home/appveyor/.local/bin:\${PATH}"
     - echo "Path after is $PATH "
     - cd /home/appveyor/.local/bin && ls
     - conan --version
