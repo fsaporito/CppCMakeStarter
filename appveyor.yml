@@ -13,6 +13,7 @@ for:
       only:
       - image: Ubuntu2004  
     environment:
+      PATH: $PATH:/my/path/foo/home/appveyor/.local/bin
       matrix:
         - COMPILER: GCC
         - COMPILER: Clang
