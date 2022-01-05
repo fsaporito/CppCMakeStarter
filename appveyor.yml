@@ -8,6 +8,8 @@ image:
 #  - x64
 test_script:
   - cmd: cd build && ctest -C Debug
+skip_commits: # Add [av skip] to commit messages to skip AppVeyor building
+  message: /\[av skip\]/
 for:
   -
     matrix:
