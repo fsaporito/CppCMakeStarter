@@ -26,10 +26,11 @@ for:
     #- python3 --version
     #- python3 -m pip install conan
     # - python -m pip install conan
-    - pip --version
-    - pip install conan
+    - pip3 --version
+    - pip3 install conan
     - source ~/.profile # Restart session so that conan is now in the PATH
     - conan --version
+    - pip3 --version
     build_script:
       - cmake -S ~/source -B ./build
       - cmake --build ./build
