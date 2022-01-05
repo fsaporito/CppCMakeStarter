@@ -20,15 +20,16 @@ for:
       - Release
     clone_folder: ~/source
     install:
-    - echo "Path after is $PATH "
-    - sudo apt-get update
+    #- sudo apt-get update
     #- sudo apt-get install ccache
-    - sudo apt-get --yes install python3-pip
-    - python3 --version
-    - python3 -m pip install conan
+    #- sudo apt-get --yes install python3-pip
+    #- python3 --version
+    #- python3 -m pip install conan
+    - python -m pip install conan
     - echo "Path before is $PATH "
     - echo "export PATH=/home/appveyor/.local/bin:\${PATH}" >> ~/.bashrc
-    - cd (home/appveyor/.local/bin && ls
+    - echo "Path after is $PATH "
+    - cd /home/appveyor/.local/bin && ls
     - conan --version
     build_script:
       - cmake -S ~/source -B ./build
