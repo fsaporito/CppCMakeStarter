@@ -20,7 +20,7 @@ for:
       - Release
     clone_folder: ~/source
     install:
-    #- sudo apt-get update
+    - sudo apt-get update
     #- sudo apt-get install ccache
     - sudo apt-get --yes install python3-pip
     #- python3 --version
