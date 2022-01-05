@@ -1,7 +1,7 @@
 image:  
   - Ubuntu2004
-  - macos
-  - Visual Studio 2019
+ # - macos
+  - Visual Studio 2019`
 #platform:
 #  - x86
 #  - x64
@@ -12,8 +12,6 @@ for:
     matrix:
       only:
       - image: Ubuntu2004  
-    configuration:
-      - Release
     clone_folder: ~/source
     install:
     - sudo apt-get update
@@ -26,26 +24,23 @@ for:
     build_script:
       - cmake -S ~/source -B ./build
       - cmake --build ./build
-  -
-    matrix:
-      only:
-      - image: macos      
-    configuration:
-      - Release
-    clone_folder: ~/source
-    install:
-      - brew update
-      - brew install conan
-    build_script:
-      - cmake -S ~/source -B ./build
-      - cmake --build ./build
+  #-
+  #  matrix:
+  #    only:
+  #    - image: macos      
+  #  configuration:
+  #    - Release
+  #  clone_folder: ~/source
+  #  install:
+  #    - brew update # Extremely Long
+  #    - brew install conan
+  #  build_script:
+  #    - cmake -S ~/source -B ./build
+  #    - cmake --build ./build
   -
     matrix:
       only:
       - image: Visual Studio 2019
-    configuration:
-      - Debug
-      - Release
     environment:
       PYTHON: "C:\\Python38-x64\\python.exe"
     clone_folder: c:\projects\source
