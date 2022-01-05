@@ -25,7 +25,9 @@ for:
     #- sudo apt-get --yes install python3-pip
     #- python3 --version
     #- python3 -m pip install conan
-    - python -m pip install conan
+    # - python -m pip install conan
+    - pip --version
+    - pip install conan
     - source ~/.profile # Restart session so that conan is now in the PATH
     - conan --version
     build_script:
