@@ -13,7 +13,6 @@ for:
       only:
       - image: Ubuntu2004  
     environment:
-      PATH: $PATH:/home/appveyor/.local/bin
       matrix:
         - COMPILER: GCC
         - COMPILER: Clang
@@ -21,7 +20,7 @@ for:
       - Release
     clone_folder: ~/source
     install:
-    #- echo "export PATH=$(pwd):\${PATH}" >> ~/.bashrc
+    - echo "export PATH=home/appveyor/.local/bin:\${PATH}" >> ~/.bashrc
     - sudo apt-get update
     #- sudo apt-get install ccache
     - sudo apt-get --yes install python3-pip
