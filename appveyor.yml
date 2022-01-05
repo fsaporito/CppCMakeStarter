@@ -1,7 +1,7 @@
 image:  
   - Ubuntu2004
-  - Visual Studio 2019`
-  - Visual Studio 2022`
+  - Visual Studio 2019
+  - Visual Studio 2022
  # - macos  
 #platform:
 #  - x86
@@ -64,4 +64,3 @@ for:
   #  build_script:
   #    - cmake -S ~/source -B ./build
   #    - cmake --build ./build
-
