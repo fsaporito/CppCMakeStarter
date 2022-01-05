@@ -12,7 +12,6 @@ for:
     matrix:
       only:
       - image: Ubuntu2004  
-    environment:
     configuration:
       - Release
     clone_folder: ~/source
@@ -31,7 +30,6 @@ for:
     matrix:
       only:
       - image: macos      
-    environment:
     configuration:
       - Release
     clone_folder: ~/source
