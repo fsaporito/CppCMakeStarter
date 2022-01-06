@@ -1,7 +1,8 @@
- #include "factorial.h"
+#include "factorial.h"
 
- int factorial::computeFact(const int factorialNumber)
- {
+int factorial::computeFact(const int factorialNumber)
+{
+
     if (factorialNumber == 0)
         return 1;
     if (factorialNumber == 1)
@@ -15,4 +16,4 @@
     if (factorialNumber == 5)
         return 120;
     return factorialNumber * computeFact(factorialNumber - 1);
- }
+}

@@ -1,7 +1,7 @@
- #include "prime.h"
+#include "prime.h"
 
- bool prime::isPrime(const int primeNumber)
- {
+bool prime::isPrime(const int primeNumber)
+{
 
     if (primeNumber <= 1)
         return false;
@@ -19,4 +19,4 @@
     }
 
     return true;
- }
+}
