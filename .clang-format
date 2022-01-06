@@ -90,7 +90,7 @@ MaxEmptyLinesToKeep: 2
 NamespaceIndentation: All
 PPIndentWidth: -1
 PointerAlignment: Left
-QualifierOrder: ['inline', 'static', 'const', 'constexpr', 'type', 'volatile']
+#QualifierOrder: ['inline', 'static', 'const', 'constexpr', 'type', 'volatile']
 ReferenceAlignment: Left
 ReflowComments: true
 SortIncludes: CaseInsensitive
