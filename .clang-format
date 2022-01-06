@@ -94,7 +94,6 @@ QualifierAlignment: Leave
 QualifierOrder: ['inline', 'static', 'const', 'constexpr', 'type', 'volatile']
 ReferenceAlignment: Left
 ReflowComments: true
-SeparateDefinitionBlocks: Always
 SortIncludes: CaseInsensitive
 SortUsingDeclarations: true
 SpaceAfterCStyleCast: true
