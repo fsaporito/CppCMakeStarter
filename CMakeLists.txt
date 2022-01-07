@@ -70,13 +70,6 @@ if(ENABLE_TESTING)
 endif()
 
 
-# Fuzzy Testing
-option(ENABLE_FUZZING "Enable Fuzzing Builds" OFF)
-if(ENABLE_FUZZING)
-  message("Building Fuzz Tests, using fuzzing sanitizer https://www.llvm.org/docs/LibFuzzer.html")
-  add_subdirectory(fuzz_test)
-endif()
-
 
 # Source Code
 add_subdirectory(src)
