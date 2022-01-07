@@ -5,11 +5,17 @@ Template Project for C++ with CMake
 Cpp Template Project for Crossplatform development.
 
 Got ideas and tricks from
+
 https://github.com/cpp-best-practices/cpp_starter_project
+
 https://github.com/aminya/setup-cpp
 
+https://github.com/cpp-best-practices/project_options
+
 CMake/C++ QuickStart at C++Weekly: https://www.youtube.com/watch?v=YbgH7yat-Jo
-GIt, CMake and Conan Talk at CppCon 2018: https://www.youtube.com/watch?v=S4QSKLXdTtA
+
+Git, CMake and Conan Talk at CppCon 2018: https://www.youtube.com/watch?v=S4QSKLXdTtA
+
 Effective CMake at CppNow 2017: https://www.youtube.com/watch?v=bsXLMQ6WgIk
 
 ### Tools and Required Software
