@@ -1,3 +1,4 @@
+ 
 from conans import ConanFile
 
 
@@ -10,4 +11,3 @@ class CppStarterProject(ConanFile):
         "spdlog/1.9.2",
     )
     generators = "cmake", "gcc", "txt", "cmake_find_package"
-
