@@ -30,7 +30,7 @@ project_options(
       # ENABLE_COVERAGE
       # ENABLE_PCH
       # PCH_HEADERS
-      # ENABLE_DOXYGEN
+      ENABLE_DOXYGEN
       # ENABLE_USER_LINKER
       # ENABLE_BUILD_WITH_TIME_TRACE
       # ENABLE_UNITY
