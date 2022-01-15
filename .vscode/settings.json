@@ -66,19 +66,16 @@
         "variant": "cpp",
         "semaphore": "cpp",
         "codecvt": "cpp"
-    }
-    {
-        "editor.formatOnPaste": true,
-        "editor.formatOnSave": true,
-        "files.trimFinalNewlines": true,
-        "files.autoSave": "afterDelay",
-        "workbench.editor.highlightModifiedTabs": true,        
-    }
-    {
-        "cmake.buildBeforeRun": true,
-        "cmake.buildDirectory": "${workspaceFolder}/build/${buildType}",
-        "cmake.parallelJobs": 1,
-        "cmake.saveBeforeBuild": true,
-        "ctestCommandArgs": "--output-on-failure --verbose"
-    }
+        },
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "files.trimFinalNewlines": true,
+    "files.autoSave": "afterDelay",
+    "workbench.editor.highlightModifiedTabs": true ,
+    "cmake.buildBeforeRun": true,
+    "cmake.buildDirectory": "${workspaceFolder}/build/${buildType}",
+    "cmake.parallelJobs": 1,
+    "cmake.saveBeforeBuild": true,
+    "cmake.ctestParallelJobs": 1,
+    "cmake.ctestArgs": "--output-on-failure --verbose"
 }
