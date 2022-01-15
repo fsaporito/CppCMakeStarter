@@ -70,7 +70,7 @@
     {
         "editor.formatOnPaste": true,
         "editor.formatOnSave": true,
-        "files.trimFinalNewlines": true
+        "files.trimFinalNewlines": true,
         "files.autoSave": "afterDelay",
         "workbench.editor.highlightModifiedTabs": true,        
     }
