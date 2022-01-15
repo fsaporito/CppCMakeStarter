@@ -74,4 +74,11 @@
         "files.autoSave": "afterDelay",
         "workbench.editor.highlightModifiedTabs": true,        
     }
+    {
+        "cmake.buildBeforeRun": true,
+        "cmake.buildDirectory": "${workspaceFolder}/build/${buildType}",
+        "cmake.parallelJobs": 1,
+        "cmake.saveBeforeBuild": true,
+        "ctestCommandArgs": "--output-on-failure --verbose"
+    }
 }
