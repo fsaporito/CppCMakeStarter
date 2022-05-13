@@ -76,6 +76,6 @@
     "cmake.buildDirectory": "${workspaceFolder}/build/${buildType}",
     "cmake.parallelJobs": 1,
     "cmake.saveBeforeBuild": true,
-    "cmake.ctestParallelJobs": 1,
-    "cmake.ctestArgs": "--output-on-failure --verbose"
+    "cmake.ctest.parallelJobs": 1,
+    "cmake.ctest.Args": "--output-on-failure --verbose"
 }
