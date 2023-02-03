@@ -20,7 +20,10 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 option(ENABLE_TESTING "enable unit tests" ON)
 option(WARNINGS_AS_ERRORS "treat warnings as errors" OFF)
 option(USE_LTO "Add LTO optimization to Release build" ON)
-option(CLANG_TIDY "Enable clang-tidy static analyzer" OFF)
+option(STATIC_ANALYZER_CLANG_TIDY "Enable include-what-you-use static analyzer" OFF)
+option(STATIC_ANALYZER_CPPCHECK "Enable clang-tidy static analyzer" OFF)
+option(STATIC_ANALYZER_IWYU "Enable cppcheck static analyzer" OFF)
+option(STATIC_ANALYZER_VISUAL_STUDIO "Enable visual studio static analyzer" OFF)
 
 # CMake modules & includes
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
@@ -30,6 +33,13 @@ include(${CMAKE_MODULE_PATH}/index.cmake)
 create_optimization_flags(USE_LTO OPTIMIZATION_SETTINGS)
 message("-- Build Type: " ${CMAKE_BUILD_TYPE})
 message("-- Optimization Settings: " ${OPTIMIZATION_SETTINGS})
+
+# Static Analyzers
+message("-- Clang-Tidy Static Analyzer is Active: " ${STATIC_ANALYZER_CLANG_TIDY})
+message("-- CPPCHECK Static Analyzer is Active: " ${STATIC_ANALYZER_CPPCHECK})
+message("-- IWYU Static Analyzer is Active: " ${STATIC_ANALYZER_IWYU})
+message("-- Visual Studio Static Analyzer is Active: " ${STATIC_ANALYZER_VISUAL_STUDIO})
+enable_static_analysis(STATIC_ANALYZER_CLANG_TIDY STATIC_ANALYZER_CPPCHECK STATIC_ANALYZER_IWYU STATIC_ANALYZER_VISUAL_STUDIO)
 
 # Source Code
 message("Building Src")
