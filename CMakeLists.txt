@@ -22,8 +22,14 @@ option(WARNINGS_AS_ERRORS "treat warnings as errors" OFF)
 option(USE_LTO "Add LTO optimization to Release build" ON)
 option(CLANG_TIDY "Enable clang-tidy static analyzer" OFF)
 
+# CMake modules & includes
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
+include(${CMAKE_MODULE_PATH}/index.cmake)
 
-
+# Set Build Type and Optimization Settings
+create_optimization_flags(USE_LTO OPTIMIZATION_SETTINGS)
+message("-- Build Type: " ${CMAKE_BUILD_TYPE})
+message("-- Optimization Settings: " ${OPTIMIZATION_SETTINGS})
 
 # Initialize project_options variable related to this project
 # uncomment the options to enable them:
