@@ -1,7 +1,10 @@
+# Set the project name and language
+project(MYPROJECT LANGUAGES C CXX)
+
+# CMake Minimum Version
 cmake_minimum_required(VERSION 3.16)
 
 # Check Requirements (Languages, Cmake, Compiler)
-cmake_minimum_required(VERSION 3.13)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 20)
@@ -17,9 +20,6 @@ include(${_project_options_SOURCE_DIR}/Index.cmake)
 # uncomment to enable vcpkg:
 # # Setup vcpkg - should be called before defining project()
 # run_vcpkg()
-
-# Set the project name and language
-project(myproject LANGUAGES CXX)
 
 # Initialize project_options variable related to this project
 # uncomment the options to enable them:
