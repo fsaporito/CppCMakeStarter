@@ -1,6 +1,7 @@
 include_guard()
 
-function(enable_static_analysis STATIC_ANALYZER_CLANG_TIDY STATIC_ANALYZER_CPPCHECK STATIC_ANALYZER_IWYU STATIC_ANALYZER_VISUAL_STUDIO)
+function(enable_static_analysis STATIC_ANALYZER_CLANG_TIDY STATIC_ANALYZER_CPPCHECK
+         STATIC_ANALYZER_IWYU STATIC_ANALYZER_VISUAL_STUDIO)
     # Clang Tidy
     if(STATIC_ANALYZER_CLANG_TIDY)
         find_program(CLANGTIDY clang-tidy REQUIRED)
@@ -39,10 +40,8 @@ function(enable_static_analysis STATIC_ANALYZER_CLANG_TIDY STATIC_ANALYZER_CPPCH
             --template=${CPPCHECK_TEMPLATE}
             --enable=style,performance,warning,portability
             --inline-suppr
-
             # We cannot act on a bug/missing feature of cppcheck
             --suppress=internalAstError
-
             # if a file does not have an internalAstError, we get an unmatchedSuppression error
             --suppress=unmatchedSuppression
             --inconclusive)
@@ -75,10 +74,7 @@ function(enable_static_analysis STATIC_ANALYZER_CLANG_TIDY STATIC_ANALYZER_CPPCH
         set(VS_ANALYSIS_RULESET "AllRules.ruleset")
 
         # Disable Clang-Tidy if not configured
-        if(NOT
-            "${CMAKE_CXX_CLANG_TIDY}"
-            STREQUAL
-            "")
+        if(NOT "${CMAKE_CXX_CLANG_TIDY}" STREQUAL "")
             set(_VS_CLANG_TIDY "true")
         else()
             set(_VS_CLANG_TIDY "false")
@@ -91,14 +87,15 @@ function(enable_static_analysis STATIC_ANALYZER_CLANG_TIDY STATIC_ANALYZER_CPPCH
             foreach(target IN LISTS ${_targets_list})
                 set_target_properties(
                     ${target}
-                    PROPERTIES
-                    VS_GLOBAL_EnableMicrosoftCodeAnalysis true
-                    VS_GLOBAL_CodeAnalysisRuleSet "${VS_ANALYSIS_RULESET}"
-                    VS_GLOBAL_EnableClangTidyCodeAnalysis "${_VS_CLANG_TIDY}"
-                )
+                    PROPERTIES VS_GLOBAL_EnableMicrosoftCodeAnalysis true
+                               VS_GLOBAL_CodeAnalysisRuleSet "${VS_ANALYSIS_RULESET}"
+                               VS_GLOBAL_EnableClangTidyCodeAnalysis "${_VS_CLANG_TIDY}")
             endforeach()
         else()
-            message(STATUS "VS static analysis was enabled but we aren't generating a visual studio project. Ignoring ...")
+            message(
+                STATUS
+                    "VS static analysis was enabled but we aren't generating a visual studio project. Ignoring ..."
+                )
         endif()
     endif()
 endfunction()

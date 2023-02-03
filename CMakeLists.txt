@@ -42,24 +42,21 @@ message("-- Optimization Settings: " ${OPTIMIZATION_SETTINGS})
 # Configuration Target with all the warnings and optimizations
 add_library(ProjectConfiguration INTERFACE)
 target_compile_options(
-  ProjectConfiguration
-  INTERFACE
-
-  # Optimization Settigs
-  ${OPTIMIZATION_SETTINGS}
-
-  # C++ warnings
-  $<$<COMPILE_LANGUAGE:CXX>:${CXX_WARNINGS_LIST}>
-
-  # C warnings
-  $<$<COMPILE_LANGUAGE:C>:${C_WARNINGS_LIST}>)
+    ProjectConfiguration
+    INTERFACE # Optimization Settigs
+              ${OPTIMIZATION_SETTINGS}
+              # C++ warnings
+              $<$<COMPILE_LANGUAGE:CXX>:${CXX_WARNINGS_LIST}>
+              # C warnings
+              $<$<COMPILE_LANGUAGE:C>:${C_WARNINGS_LIST}>)
 
 # Static Analyzers
 message("-- Clang-Tidy Static Analyzer is Active: " ${STATIC_ANALYZER_CLANG_TIDY})
 message("-- CPPCHECK Static Analyzer is Active: " ${STATIC_ANALYZER_CPPCHECK})
 message("-- IWYU Static Analyzer is Active: " ${STATIC_ANALYZER_IWYU})
 message("-- Visual Studio Static Analysis is Active: " ${STATIC_ANALYZER_VISUAL_STUDIO})
-enable_static_analysis(STATIC_ANALYZER_CLANG_TIDY STATIC_ANALYZER_CPPCHECK STATIC_ANALYZER_IWYU STATIC_ANALYZER_VISUAL_STUDIO)
+enable_static_analysis(STATIC_ANALYZER_CLANG_TIDY STATIC_ANALYZER_CPPCHECK STATIC_ANALYZER_IWYU
+                       STATIC_ANALYZER_VISUAL_STUDIO)
 
 # Source Code
 message("Building Src")
@@ -67,7 +64,7 @@ add_subdirectory(src)
 
 # Tests
 if(ENABLE_TESTING)
-  enable_testing()
-  message("Building Tests.")
-  add_subdirectory(test)
+    enable_testing()
+    message("Building Tests.")
+    add_subdirectory(test)
 endif()

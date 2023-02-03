@@ -8,11 +8,9 @@ function(create_warnings_list C_WARNINGS_LIST CXX_WARNINGS_LIST WARNINGS_AS_ERRO
         /w14254 # 'operator': conversion from 'type1:field_bits' to 'type2:field_bits', possible loss of data
         /w14263 # 'function': member function does not override any base class virtual member function
         /w14265 # 'classname': class has virtual functions, but destructor is not virtual instances of this class may not
-
         # be destructed correctly
         /w14287 # 'operator': unsigned/negative constant mismatch
         /we4289 # nonstandard extension used: 'variable': loop control variable declared in the for-loop is used outside
-
         # the for-loop scope
         /w14296 # 'operator': expression is always 'boolean_value'
         /w14311 # 'variable': pointer truncation from 'type1' to 'type2'
@@ -28,7 +26,7 @@ function(create_warnings_list C_WARNINGS_LIST CXX_WARNINGS_LIST WARNINGS_AS_ERRO
         /w14906 # string literal cast to 'LPWSTR'
         /w14928 # illegal copy-initialization; more than one user-defined conversion has been implicitly applied
         /permissive- # standards conformance mode for MSVC compiler.
-    )
+        )
 
     # Clang Warnings
     set(CLANG_WARNINGS
@@ -48,7 +46,7 @@ function(create_warnings_list C_WARNINGS_LIST CXX_WARNINGS_LIST WARNINGS_AS_ERRO
         -Wdouble-promotion # warn if float is implicit promoted to double
         -Wformat=2 # warn on security issues around functions that format output (ie printf)
         -Wimplicit-fallthrough # warn on statements that fallthrough without an explicit annotation
-    )
+        )
 
     # Gcc Warnings
     set(GCC_WARNINGS
@@ -58,7 +56,7 @@ function(create_warnings_list C_WARNINGS_LIST CXX_WARNINGS_LIST WARNINGS_AS_ERRO
         -Wduplicated-branches # warn if if / else branches have duplicated code
         -Wlogical-op # warn about logical operations being used where bitwise were probably wanted
         -Wuseless-cast # warn if you perform a cast to the same type
-    )
+        )
 
     # Warnings as Errors
     if(WARNINGS_AS_ERRORS)
