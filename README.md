@@ -177,12 +177,6 @@ Note: Check that pip is installed with python3, otherwise there will be errors w
 </details>
 <br/><br/>
 
-C++20 is required since the following features are used in the library or in the client:
-- Concepts
-- Designated Initializer
-- Map.contains
-- Using enum construct
-
 To setup the environment on linux ubuntu, there are two scripts that can be used:
 
 1. For installing conan
