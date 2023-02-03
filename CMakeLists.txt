@@ -17,7 +17,7 @@ set(CMAKE_VERBOSE_MAKEFILE OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Custom Options
-option(BUILD_TESTS "enable unit tests" ON)
+option(ENABLE_TESTING "enable unit tests" ON)
 option(WARNINGS_AS_ERRORS "treat warnings as errors" OFF)
 option(USE_LTO "Add LTO optimization to Release build" ON)
 option(CLANG_TIDY "Enable clang-tidy static analyzer" OFF)
@@ -31,42 +31,11 @@ create_optimization_flags(USE_LTO OPTIMIZATION_SETTINGS)
 message("-- Build Type: " ${CMAKE_BUILD_TYPE})
 message("-- Optimization Settings: " ${OPTIMIZATION_SETTINGS})
 
-# Initialize project_options variable related to this project
-# uncomment the options to enable them:
-project_options(
-  ENABLE_CACHE
-
-  # ENABLE_CPPCHECK
-  # ENABLE_CLANG_TIDY
-  WARNINGS_AS_ERRORS
-  ENABLE_CONAN
-
-  # ENABLE_IPO
-  # ENABLE_INCLUDE_WHAT_YOU_USE
-  # ENABLE_COVERAGE
-  # ENABLE_PCH
-  # PCH_HEADERS
-  ENABLE_DOXYGEN
-
-  # ENABLE_USER_LINKER
-  # ENABLE_BUILD_WITH_TIME_TRACE
-  # ENABLE_UNITY
-  # ENABLE_SANITIZER_ADDRESS
-  # ENABLE_SANITIZER_LEAK
-  # ENABLE_SANITIZER_UNDEFINED_BEHAVIOR
-  # ENABLE_SANITIZER_THREAD
-  # ENABLE_SANITIZER_MEMORY
-  # CONAN_OPTIONS
-)
-
 # Source Code
 message("Building Src")
 add_subdirectory(src)
 
-# Tests Code
-# Adding the tests:
-option(ENABLE_TESTING "Enable the tests" ON)
-
+# Tests
 if(ENABLE_TESTING)
   enable_testing()
   message("Building Tests.")
