@@ -19,19 +19,11 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Custom Options
 option(BUILD_TESTS "enable unit tests" ON)
 option(WARNINGS_AS_ERRORS "treat warnings as errors" OFF)
-option(LTO "Add LTO optimization to Release build" ON)
+option(USE_LTO "Add LTO optimization to Release build" ON)
 option(CLANG_TIDY "Enable clang-tidy static analyzer" OFF)
 
-# Add project_options v0.12.2
-# https://github.com/cpp-best-practices/project_options
-include(FetchContent)
-FetchContent_Declare(_project_options URL https://github.com/cpp-best-practices/project_options/archive/refs/tags/v0.12.2.zip)
-FetchContent_MakeAvailable(_project_options)
-include(${_project_options_SOURCE_DIR}/Index.cmake)
 
-# uncomment to enable vcpkg:
-# # Setup vcpkg - should be called before defining project()
-# run_vcpkg()
+
 
 # Initialize project_options variable related to this project
 # uncomment the options to enable them:
