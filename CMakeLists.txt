@@ -29,16 +29,36 @@ option(STATIC_ANALYZER_VISUAL_STUDIO "Enable visual studio static analyzer" OFF)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
 include(${CMAKE_MODULE_PATH}/index.cmake)
 
+# Set Warnings
+create_warnings_list(C_WARNINGS_LIST CXX_WARNINGS_LIST WARNINGS_AS_ERRORS)
+message("-- C Warnings: " ${C_WARNINGS_LIST})
+message("-- C++ Warnings: " ${CXX_WARNINGS_LIST})
+
 # Set Build Type and Optimization Settings
 create_optimization_flags(USE_LTO OPTIMIZATION_SETTINGS)
 message("-- Build Type: " ${CMAKE_BUILD_TYPE})
 message("-- Optimization Settings: " ${OPTIMIZATION_SETTINGS})
 
+# Configuration Target with all the warnings and optimizations
+add_library(ProjectConfiguration INTERFACE)
+target_compile_options(
+  ProjectConfiguration
+  INTERFACE
+
+  # Optimization Settigs
+  ${OPTIMIZATION_SETTINGS}
+
+  # C++ warnings
+  $<$<COMPILE_LANGUAGE:CXX>:${CXX_WARNINGS_LIST}>
+
+  # C warnings
+  $<$<COMPILE_LANGUAGE:C>:${C_WARNINGS_LIST}>)
+
 # Static Analyzers
 message("-- Clang-Tidy Static Analyzer is Active: " ${STATIC_ANALYZER_CLANG_TIDY})
 message("-- CPPCHECK Static Analyzer is Active: " ${STATIC_ANALYZER_CPPCHECK})
 message("-- IWYU Static Analyzer is Active: " ${STATIC_ANALYZER_IWYU})
-message("-- Visual Studio Static Analyzer is Active: " ${STATIC_ANALYZER_VISUAL_STUDIO})
+message("-- Visual Studio Static Analysis is Active: " ${STATIC_ANALYZER_VISUAL_STUDIO})
 enable_static_analysis(STATIC_ANALYZER_CLANG_TIDY STATIC_ANALYZER_CPPCHECK STATIC_ANALYZER_IWYU STATIC_ANALYZER_VISUAL_STUDIO)
 
 # Source Code
