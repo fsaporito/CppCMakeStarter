@@ -16,6 +16,12 @@ set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Custom Options
+option(BUILD_TESTS "enable unit tests" ON)
+option(WARNINGS_AS_ERRORS "treat warnings as errors" OFF)
+option(LTO "Add LTO optimization to Release build" ON)
+option(CLANG_TIDY "Enable clang-tidy static analyzer" OFF)
+
 # Add project_options v0.12.2
 # https://github.com/cpp-best-practices/project_options
 include(FetchContent)
