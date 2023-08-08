@@ -1,13 +1,24 @@
 # Set the project name and language
-project(MYPROJECT LANGUAGES C CXX)
+project(
+  MYPROJECT
+  VERSION 1.0.0
+  URL "URL"
+  LANGUAGES C CXX)
 
 # CMake Minimum Version
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.21) # Needed for Preset
 
 # Check Requirements (Languages, Cmake, Compiler)
-set(CMAKE_C_STANDARD 11)
+if(NOT DEFINED CMAKE_C_STANDARD)
+  set(CMAKE_C_STANDARD 11)
+endif()
+
 set(CMAKE_C_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_STANDARD 20)
+
+if(NOT DEFINED CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 20)
+endif()
+
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # CMake Options
@@ -18,13 +29,13 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Custom Options
 option(ENABLE_CONAN "Enable conan for dependency management" ON)
-option(ENABLE_TESTING "enable unit tests" ON)
+option(ENABLE_TESTING "Enable unit tests" ON)
 option(USE_LTO "Add LTO optimization to Release build" ON)
 option(STATIC_ANALYZER_CLANG_TIDY "Enable include-what-you-use static analyzer" OFF)
 option(STATIC_ANALYZER_CPPCHECK "Enable clang-tidy static analyzer" OFF)
 option(STATIC_ANALYZER_IWYU "Enable cppcheck static analyzer" OFF)
 option(STATIC_ANALYZER_VISUAL_STUDIO "Enable visual studio static analyzer" OFF)
-option(WARNINGS_AS_ERRORS "treat warnings as errors" OFF)
+option(WARNINGS_AS_ERRORS "treat warnings as errors" ON)
 
 # CMake modules & includes
 set(CMAKE_CUSTOM_MODULES_PATH ${CMAKE_CUSTOM_MODULES_PATH} ${CMAKE_SOURCE_DIR}/cmake)
