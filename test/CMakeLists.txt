@@ -1,16 +1,12 @@
 find_package(Catch2 REQUIRED)
 
 include(CTest)
-include(Catch)
-
-add_library(catch_main STATIC catch_main.cpp)
-target_link_libraries(catch_main PUBLIC Catch2::Catch2)
-target_link_libraries(catch_main PRIVATE ProjectConfiguration)
+include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
 
 include_directories(../src)
 
 add_executable(tests tests.cpp)
-target_link_libraries(tests PRIVATE ProjectConfiguration catch_main fact prime)
+target_link_libraries(tests PRIVATE ProjectConfiguration Catch2::Catch2WithMain fact prime)
 message(STATUS "Target TEST created successfully")
 
 # automatically discover tests that are defined in catch based test files you can modify the unittests. Set TEST_PREFIX
@@ -20,7 +16,7 @@ catch_discover_tests(
     TEST_PREFIX
     "unittests."
     REPORTER
-    xml
+    XML
     OUTPUT_DIR
     .
     OUTPUT_PREFIX

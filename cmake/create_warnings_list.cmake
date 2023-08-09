@@ -33,7 +33,7 @@ function(create_warnings_list C_WARNINGS_LIST CXX_WARNINGS_LIST WARNINGS_AS_ERRO
     # Clang Warnings
     set(CLANG_WARNINGS
         -Wall
-        -Wextra # reasonable and standard
+        -Wextra
         -Wextra-semi # Warn about semicolon after in-class function definition.
         -Wshadow # warn the user if a variable declaration shadows one from a parent context
         -Wnon-virtual-dtor # warn the user if a class with virtual functions has a non-virtual destructor.

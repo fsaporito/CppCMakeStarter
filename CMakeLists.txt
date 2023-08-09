@@ -1,8 +1,11 @@
+if(POLICY CMP0048)
+  cmake_policy(SET CMP0048 NEW)
+endif(POLICY CMP0048)
+
 # Set the project name and language
 project(
   MYPROJECT
   VERSION 1.0.0
-  URL "URL"
   LANGUAGES C CXX)
 
 # CMake Minimum Version
@@ -21,26 +24,14 @@ endif()
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# CMake Options
-set(CMAKE_DISABLE_SOURCE_CHANGES ON)
-set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
-set(CMAKE_VERBOSE_MAKEFILE OFF)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-# Custom Options
-option(ENABLE_CONAN "Enable conan for dependency management" ON)
-option(ENABLE_TESTING "Enable unit tests" ON)
-option(USE_LTO "Add LTO optimization to Release build" ON)
-option(STATIC_ANALYZER_CLANG_TIDY "Enable include-what-you-use static analyzer" OFF)
-option(STATIC_ANALYZER_CPPCHECK "Enable clang-tidy static analyzer" OFF)
-option(STATIC_ANALYZER_IWYU "Enable cppcheck static analyzer" OFF)
-option(STATIC_ANALYZER_VISUAL_STUDIO "Enable visual studio static analyzer" OFF)
-option(WARNINGS_AS_ERRORS "treat warnings as errors" ON)
-
 # CMake modules & includes
 set(CMAKE_CUSTOM_MODULES_PATH ${CMAKE_CUSTOM_MODULES_PATH} ${CMAKE_SOURCE_DIR}/cmake)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CUSTOM_MODULES_PATH}")
 include(${CMAKE_CUSTOM_MODULES_PATH}/index.cmake)
+
+# Dependency Management
+option(ENABLE_CONAN "Enable conan for dependency management" OFF)
+option(ENABLE_CPM "Enable CPM for dependency management" ON)
 
 # Set Warnings
 create_warnings_list(C_WARNINGS_LIST CXX_WARNINGS_LIST WARNINGS_AS_ERRORS)
@@ -73,9 +64,24 @@ message("-- Visual Studio Static Analysis is Active: " ${STATIC_ANALYZER_VISUAL_
 enable_static_analysis(STATIC_ANALYZER_CLANG_TIDY STATIC_ANALYZER_CPPCHECK STATIC_ANALYZER_IWYU
   STATIC_ANALYZER_VISUAL_STUDIO)
 
-# Conan Configuration & Dependencies install
+# Dependencies configuration
+if(ENABLE_CONAN AND ENABLE_CPM)
+  message(WARNING "Multiple dependency managers enabled. I hope you know what you are doing")
+endif()
+
+if(NOT(ENABLE_CONAN OR ENABLE_CPM))
+  message(WARNING "No dependency manager configured. I hope you know what you are doing")
+endif()
+
 if(ENABLE_CONAN)
+  message("-- Using Conan for dependency management")
   include(${CMAKE_CUSTOM_MODULES_PATH}/conan_config.cmake)
+endif()
+
+if(ENABLE_CPM)
+  message("-- Using CPM for dependency management")
+  include(${CMAKE_MODULES_FOLDER}/CPM_dependencies.cmake)
+  setup_CPM_dependencies()
 endif()
 
 # Source Code

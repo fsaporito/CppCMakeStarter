@@ -14,8 +14,7 @@ if(USE_PRIME)
 endif()
 
 find_package(spdlog)
-find_package(docopt)
 
 # Generic test that uses conan libs
 add_executable(intro main.cpp)
-target_link_libraries(intro PUBLIC ProjectConfiguration fact prime docopt::docopt spdlog::spdlog)
+target_link_libraries(intro PUBLIC ProjectConfiguration fact prime CLI11::CLI11 spdlog::spdlog)
