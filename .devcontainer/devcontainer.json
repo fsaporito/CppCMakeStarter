@@ -11,8 +11,8 @@
 		// Update 'INSTALL_DOXYGEN' to install Doxygen inside the devcontainer. Options: "true"/"false"
 		"args": {
 			"UBUNTU_VARIANT": "jammy",
-			"GCC_VER": "12",
-			"LLVM_VER": "15",
+			"GCC_VER": "13",
+			"LLVM_VER": "18",
 			"INSTALL_CONAN": "true",
 			"INSTALL_DOXYGEN": "false"
 		}
@@ -20,20 +20,27 @@
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"cmake.configureOnOpen": false,
-		"editor.formatOnSave": true
+		"cmake.options.statusBarVisibility": "visible",
+		"editor.formatOnPaste": true,
+		"editor.formatOnSave": true,
+		"editor.insertSpaces": true,
+		"editor.tabSize": 4,
+		"trailing-spaces.trimOnSave": true,
+		"workbench.editor.highlightModifiedTabs": true
 	},
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"ms-vscode.cpptools",
-		"ms-vscode.cmake-tools",
-		"twxs.cmake",
-		"ms-vscode.cpptools-themes",
+		"ms-vscode.cpptools-extension-pack",
 		"cschlosser.doxdocgen",
 		"eamodio.gitlens",
+		"mhutchie.git-graph",
+		"hediet.vscode-drawio",
 		"ms-python.python",
 		"ms-python.vscode-pylance",
 		"mutantdino.resourcemonitor",
-		"matepek.vscode-catch2-test-adapter"
+		"matepek.vscode-catch2-test-adapter",
+		"shardulm94.trailing-spaces",
+		"Guyutongxue.cpp-reference"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
