@@ -1,7 +1,7 @@
 include_guard()
 
 function(enable_static_analysis STATIC_ANALYZER_CLANG_TIDY STATIC_ANALYZER_CPPCHECK
-         STATIC_ANALYZER_IWYU STATIC_ANALYZER_VISUAL_STUDIO)
+    STATIC_ANALYZER_IWYU STATIC_ANALYZER_VISUAL_STUDIO)
     # Clang Tidy
     if(STATIC_ANALYZER_CLANG_TIDY)
         find_program(CLANGTIDY clang-tidy REQUIRED)
@@ -9,19 +9,18 @@ function(enable_static_analysis STATIC_ANALYZER_CLANG_TIDY STATIC_ANALYZER_CPPCH
         # Clang Tidy not found on Path
         if(NOT CLANGTIDY)
             message(WARNING "Static Analyzer clang-tidy was Requested but cannot be found on path")
-            return()
+        else()
+            # Set C++ Clang Tidy
+            set(CMAKE_CXX_CLANG_TIDY ${CLANGTIDY})
+
+            # Warnings as Errors
+            if(WARNINGS_AS_ERRORS)
+                list(APPEND CMAKE_CXX_CLANG_TIDY -warnings-as-errors=*)
+            endif()
+
+            # Set C Clang Tidy
+            set(CMAKE_C_CLANG_TIDY ${CMAKE_CXX_CLANG_TIDY})
         endif()
-
-        # Set C++ Clang Tidy
-        set(CMAKE_CXX_CLANG_TIDY ${CLANGTIDY})
-
-        # Warnings as Errors
-        if(WARNINGS_AS_ERRORS)
-            list(APPEND CMAKE_CXX_CLANG_TIDY -warnings-as-errors=*)
-        endif()
-
-        # Set C Clang Tidy
-        set(CMAKE_C_CLANG_TIDY ${CMAKE_CXX_CLANG_TIDY})
     endif()
 
     # CppCheck
@@ -31,28 +30,29 @@ function(enable_static_analysis STATIC_ANALYZER_CLANG_TIDY STATIC_ANALYZER_CPPCH
         # CppCheck not found on Path
         if(NOT CPPCHECK)
             message(WARNING "Static Analyzer cppcheck was Requested but cannot be found on path")
-            return()
+        else()
+            # Set C++ CppCheck
+            set(CMAKE_CXX_CPPCHECK
+                ${CPPCHECK}
+                --template=${CPPCHECK_TEMPLATE}
+                --enable=style,performance,warning,portability
+                --inline-suppr
+
+                # We cannot act on a bug/missing feature of cppcheck
+                --suppress=internalAstError
+
+                # if a file does not have an internalAstError, we get an unmatchedSuppression error
+                --suppress=unmatchedSuppression
+                --inconclusive)
+
+            # Warnings as Errors
+            if(WARNINGS_AS_ERRORS)
+                list(APPEND CMAKE_CXX_CPPCHECK --error-exitcode=2)
+            endif()
+
+            # Set C CppCheck
+            set(CMAKE_C_CPPCHECK ${CMAKE_CXX_CPPCHECK})
         endif()
-
-        # Set C++ CppCheck
-        set(CMAKE_CXX_CPPCHECK
-            ${CPPCHECK}
-            --template=${CPPCHECK_TEMPLATE}
-            --enable=style,performance,warning,portability
-            --inline-suppr
-            # We cannot act on a bug/missing feature of cppcheck
-            --suppress=internalAstError
-            # if a file does not have an internalAstError, we get an unmatchedSuppression error
-            --suppress=unmatchedSuppression
-            --inconclusive)
-
-        # Warnings as Errors
-        if(WARNINGS_AS_ERRORS)
-            list(APPEND CMAKE_CXX_CPPCHECK --error-exitcode=2)
-        endif()
-
-        # Set C CppCheck
-        set(CMAKE_C_CPPCHECK ${CMAKE_CXX_CPPCHECK})
     endif()
 
     # Include-What-You-Use (IWYU)
@@ -62,11 +62,10 @@ function(enable_static_analysis STATIC_ANALYZER_CLANG_TIDY STATIC_ANALYZER_CPPCH
         # YWYU not found on Path
         if(NOT IWYU)
             message(WARNING "Static Analyzer iwyu was Requested but cannot be found on path")
-            return()
+        else()
+            # Set C++ IWYU
+            set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE ${IWYU})
         endif()
-
-        # Set C++ IWYU
-        set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE ${IWYU})
     endif()
 
     # Static Analysis in Visual Code
@@ -88,14 +87,14 @@ function(enable_static_analysis STATIC_ANALYZER_CLANG_TIDY STATIC_ANALYZER_CPPCH
                 set_target_properties(
                     ${target}
                     PROPERTIES VS_GLOBAL_EnableMicrosoftCodeAnalysis true
-                               VS_GLOBAL_CodeAnalysisRuleSet "${VS_ANALYSIS_RULESET}"
-                               VS_GLOBAL_EnableClangTidyCodeAnalysis "${_VS_CLANG_TIDY}")
+                    VS_GLOBAL_CodeAnalysisRuleSet "${VS_ANALYSIS_RULESET}"
+                    VS_GLOBAL_EnableClangTidyCodeAnalysis "${_VS_CLANG_TIDY}")
             endforeach()
         else()
             message(
                 STATUS
-                    "VS static analysis was enabled but we aren't generating a visual studio project. Ignoring ..."
-                )
+                "VS static analysis was enabled but we aren't generating a visual studio project. Ignoring ..."
+            )
         endif()
     endif()
 endfunction()
