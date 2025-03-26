@@ -1,5 +1,5 @@
-# Ubuntu Version: jammy - 22.04
-ARG UBUNTU_VARIANT="jammy"
+# Ubuntu Version: noble - 24.04
+ARG UBUNTU_VARIANT="noble"
 FROM ubuntu:${UBUNTU_VARIANT}
 
 
@@ -14,7 +14,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -y --no-install-recommends \
     apt-utils
-    
+
 # Install Common Software from Standard Ubuntu Repo
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -y --no-install-recommends \
@@ -80,7 +80,7 @@ RUN update-alternatives --install /usr/bin/clang++ clang++ $(which clang++-${LLV
 
 # Set the default clang-tidy, so CMake can find it
 RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy $(which clang-tidy-${LLVM_VER}) 1
- 
+
 
 # Install common build tools
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -110,9 +110,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 # https://www.doxygen.nl/
 ARG INSTALL_DOXYGEN=false
 RUN if [ "INSTALL_DOXYGEN" = "true" ] ; then \
-        apt-get install -y --no-install-recommends doxygen graphviz; \
+    apt-get install -y --no-install-recommends doxygen graphviz; \
     else \
-        echo "Doxygen not installed by user configuration"; \
+    echo "Doxygen not installed by user configuration"; \
     fi
 
 
@@ -138,7 +138,7 @@ RUN CC=clang-${LLVM_VER} CXX=clang++-${LLVM_VER} cmake -S ${IWYU_SRC} \
 RUN mkdir -p $(include-what-you-use -print-resource-dir 2>/dev/null)
 RUN ln -s $(readlink -f /usr/lib/clang/${LLVM_VER}/include) \
     $(include-what-you-use -print-resource-dir 2>/dev/null)/include
-    
+
 
 # Install Conan for dependency management
 # Notes:
@@ -150,16 +150,16 @@ RUN ln -s $(readlink -f /usr/lib/clang/${LLVM_VER}/include) \
 #      leaving this flag undefined can cause some installation failures.
 ARG INSTALL_CONAN=true
 RUN if [ "INSTALL_CONAN" = "true" ] ; then \
-        python3 -m pip install --upgrade pip setuptools && \
-        python3 -m pip install conan && \
-        conan --version; \
-        export CONAN_SYSREQUIRES_SUDO = 0; \        
-        export CONAN_SYSREQUIRES_MODE=enabled; \
+    python3 -m pip install --upgrade pip setuptools && \
+    python3 -m pip install conan && \
+    conan --version; \
+    export CONAN_SYSREQUIRES_SUDO = 0; \        
+    export CONAN_SYSREQUIRES_MODE=enabled; \
     else \
-        echo "Conan not installed by user configuration"; \
+    echo "Conan not installed by user configuration"; \
     fi
 
-    
+
 ## Cleanup cached apt data
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get autoremove -y --purge \
