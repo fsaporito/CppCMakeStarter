@@ -17,31 +17,37 @@
 			"INSTALL_DOXYGEN": "false"
 		}
 	},
-	// Set *default* container specific settings.json values on container create.
-	"settings": {
-		"cmake.configureOnOpen": false,
-		"cmake.options.statusBarVisibility": "visible",
-		"editor.formatOnPaste": true,
-		"editor.formatOnSave": true,
-		"editor.insertSpaces": true,
-		"editor.tabSize": 4,
-		"trailing-spaces.trimOnSave": true,
-		"workbench.editor.highlightModifiedTabs": true
+	// Use 'settings' to set *default* container specific settings.json values on container create.
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"customizations": {
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": {
+				"cmake.configureOnOpen": false,
+				"cmake.options.statusBarVisibility": "visible",
+				"editor.formatOnPaste": true,
+				"editor.formatOnSave": true,
+				"editor.insertSpaces": true,
+				"editor.tabSize": 4,
+				"trailing-spaces.trimOnSave": true,
+				"workbench.editor.highlightModifiedTabs": true
+			},
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-vscode.cpptools-extension-pack",
+				"cschlosser.doxdocgen",
+				"eamodio.gitlens",
+				"mhutchie.git-graph",
+				"hediet.vscode-drawio",
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"mutantdino.resourcemonitor",
+				"matepek.vscode-catch2-test-adapter",
+				"shardulm94.trailing-spaces",
+				"Guyutongxue.cpp-reference"
+			]
+		}
 	},
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"ms-vscode.cpptools-extension-pack",
-		"cschlosser.doxdocgen",
-		"eamodio.gitlens",
-		"mhutchie.git-graph",
-		"hediet.vscode-drawio",
-		"ms-python.python",
-		"ms-python.vscode-pylance",
-		"mutantdino.resourcemonitor",
-		"matepek.vscode-catch2-test-adapter",
-		"shardulm94.trailing-spaces",
-		"Guyutongxue.cpp-reference"
-	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Use 'postCreateCommand' to run commands after the container is created.
