@@ -20,9 +20,9 @@ option(STATIC_ANALYZER_IWYU "Enable cppcheck static analyzer" OFF)
 option(STATIC_ANALYZER_VISUAL_STUDIO "Enable visual studio static analyzer" OFF)
 
 # Options Set
-option(ENABLE_DEV_OPTIONS "Enable static analyzer, ccache, warnings as errors" OFF)
+option(ENABLE_DEV_OPTIONS "Enable static analyzer, ccache, warnings as errors" ON)
 
-if(${ENABLE_DEV_OPTIONS})
+if(ENABLE_DEV_OPTIONS)
     message(
         STATUS
         "Developer mode is Active. For production, use `-DENABLE_DEV_OPTIONS:BOOL=OFF`.")
