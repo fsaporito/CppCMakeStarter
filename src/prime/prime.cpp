@@ -1,4 +1,5 @@
 #include "prime.h"
+#include <cmath>
 
 bool prime::isPrime(const int primeNumber)
 {
@@ -9,12 +10,14 @@ bool prime::isPrime(const int primeNumber)
     if (primeNumber == 2 || primeNumber == 3)
         return true;
 
-    if (primeNumber % 2 == 0 || primeNumber % 3 == 0)
+    if (primeNumber % 2 == 0)
         return false;
 
-    for (int i = 5; i * i <= primeNumber; i += 6)
+    auto primeNumberSqrt = static_cast<decltype(primeNumber)>(std::sqrt(primeNumber));
+
+    for (int i = 3; i <= primeNumberSqrt; i += 2)
     {
-        if (primeNumber % i == 0 || primeNumber % (i + 2) == 0)
+        if (primeNumber % i == 0)
             return false;
     }
 
