@@ -1,5 +1,5 @@
-# Ubuntu Version: noble - 24.04
-ARG UBUNTU_VARIANT="noble"
+# Ubuntu Version: plucky - 25.04
+ARG UBUNTU_VARIANT="plucky"
 FROM ubuntu:${UBUNTU_VARIANT}
 
 
@@ -33,7 +33,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test
 
 # Add llvm repo for clang
-ARG LLVM_VER="18"
+ARG LLVM_VER="19"
 ARG LLVM_URL="http://apt.llvm.org/${UBUNTU_VARIANT}/"
 ARG LLVM_PKG="llvm-toolchain-${UBUNTU_VARIANT}-${LLVM_VER}"
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - 2>/dev/null && \

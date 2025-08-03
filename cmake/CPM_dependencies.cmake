@@ -15,7 +15,7 @@ function(setup_CPM_dependencies)
             NAME
             spdlog
             VERSION
-            1.11.0
+            1.15.0
             GITHUB_REPOSITORY
             "gabime/spdlog"
             OPTIONS
@@ -23,10 +23,10 @@ function(setup_CPM_dependencies)
     endif()
 
     if(NOT TARGET CLI11::CLI11)
-        cpmaddpackage("gh:CLIUtils/CLI11@2.3.2")
+        cpmaddpackage("gh:CLIUtils/CLI11@2.5.0")
     endif()
 
     if(NOT TARGET Catch2::Catch2WithMain)
-        cpmaddpackage("gh:catchorg/Catch2@3.3.2")
+        cpmaddpackage("gh:catchorg/Catch2@3.9.0")
     endif()
 endfunction()

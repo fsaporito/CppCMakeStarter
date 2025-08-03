@@ -65,7 +65,8 @@
         "thread": "cpp",
         "variant": "cpp",
         "semaphore": "cpp",
-        "codecvt": "cpp"
+        "codecvt": "cpp",
+        "complex": "cpp"
     },
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
