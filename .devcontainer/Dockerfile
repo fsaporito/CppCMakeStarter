@@ -7,7 +7,7 @@ FROM ubuntu:${UBUNTU_VARIANT}
 ARG UBUNTU_VARIANT
 
 
-# Run apt-get update 
+# Run apt-get update
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive
 
 # Install apt-utils
@@ -25,6 +25,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     nano \
     python3 \
     python3-pip \
+    ssh \
     software-properties-common \
     wget
 
@@ -46,7 +47,7 @@ RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/nul
     | gpg --dearmor - | tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null && \
     apt-add-repository -y "deb ${CMAKE_URL} ${CMAKE_PKG} main"
 
-# Run apt-get update 
+# Run apt-get update
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive
 
 
@@ -89,7 +90,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     cmake-curses-gui \
     make \
     meson \
-    ninja-build    
+    ninja-build
 
 
 # Install CCache, a caching tool for compilers
@@ -153,7 +154,7 @@ RUN if [ "INSTALL_CONAN" = "true" ] ; then \
     python3 -m pip install --upgrade pip setuptools && \
     python3 -m pip install conan && \
     conan --version; \
-    export CONAN_SYSREQUIRES_SUDO = 0; \        
+    export CONAN_SYSREQUIRES_SUDO = 0; \
     export CONAN_SYSREQUIRES_MODE=enabled; \
     else \
     echo "Conan not installed by user configuration"; \
