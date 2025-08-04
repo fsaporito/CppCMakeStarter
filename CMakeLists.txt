@@ -1,3 +1,6 @@
+# CMake Minimum Version
+cmake_minimum_required(VERSION 3.21) # Needed for Preset
+
 if(POLICY CMP0048)
   cmake_policy(SET CMP0048 NEW)
 endif(POLICY CMP0048)
@@ -7,9 +10,6 @@ project(
   MYPROJECT
   VERSION 1.0.0
   LANGUAGES C CXX)
-
-# CMake Minimum Version
-cmake_minimum_required(VERSION 3.21) # Needed for Preset
 
 # Check Requirements (Languages, Cmake, Compiler)
 if(NOT DEFINED CMAKE_C_STANDARD)
