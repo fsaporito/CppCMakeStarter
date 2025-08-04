@@ -19,6 +19,12 @@ option(STATIC_ANALYZER_CPPCHECK "Enable clang-tidy static analyzer" OFF)
 option(STATIC_ANALYZER_IWYU "Enable cppcheck static analyzer" OFF)
 option(STATIC_ANALYZER_VISUAL_STUDIO "Enable visual studio static analyzer" OFF)
 
+# Sanitizers
+option(SANITIZER_ADDRESS "Enable address sanitizer" OFF)
+option(SANITIZER_UNDEFINED "Enable undefined behavious sanitizer" OFF)
+option(SANITIZER_LEAK "Enable leak sanitizer" OFF)
+option(SANITIZER_THREAD "Enable thread sanitizer" OFF)
+
 # Options Set
 option(ENABLE_DEV_OPTIONS "Enable static analyzer, ccache, warnings as errors" ON)
 

@@ -43,18 +43,37 @@ create_optimization_flags(USE_LTO OPTIMIZATION_SETTINGS)
 message("-- Build Type: " ${CMAKE_BUILD_TYPE})
 message("-- Optimization Settings: " ${OPTIMIZATION_SETTINGS})
 
+# Enable Sanitizers
+message("-- Address Sanitizer is Active: " ${SANITIZER_ADDRESS})
+message("-- Undefined Behaviour is Active: " ${SANITIZER_UNDEFINED})
+message("-- Leak Sanitizer is Active: " ${SANITIZER_LEAK})
+message("-- Thread SAnitizer is Active: " ${SANITIZER_THREAD})
+enable_static_analysis(SANITIZER_ADDRESS SANITIZER_UNDEFINED SANITIZER_LEAK
+  SANITIZER_THREAD)
+if (SANITIZER_COMPILER_FLAGS)
+  message("Sanitizers Compiler Flags: ${SANITIZER_COMPILER_FLAGS}")
+else()
+  message("Sanitizers Compiler Flags: NONE")
+endif()
+if (SANITIZER_LINKER_FLAGS)
+  message("Sanitizers Linker Flags: ${SANITIZER_LINKER_FLAGS}")
+else()
+  message("Sanitizers Linker Flags: NONE")
+endif()
+
 # Configuration Target with all the warnings and optimizations
 add_library(ProjectConfiguration INTERFACE)
 target_compile_options(
   ProjectConfiguration
-  INTERFACE # Optimization Settigs
+  INTERFACE
   ${OPTIMIZATION_SETTINGS}
-
-  # C++ warnings
   $<$<COMPILE_LANGUAGE:CXX>:${CXX_WARNINGS_LIST}>
-
-  # C warnings
   $<$<COMPILE_LANGUAGE:C>:${C_WARNINGS_LIST}>)
+target_link_options(
+  ProjectConfiguration
+  INTERFACE
+  ${SANITIZER_LINKER_FLAGS}
+)
 
 # Static Analyzers
 message("-- Clang-Tidy Static Analyzer is Active: " ${STATIC_ANALYZER_CLANG_TIDY})
