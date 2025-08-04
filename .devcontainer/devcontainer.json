@@ -4,19 +4,25 @@
 	"name": "C++ DevContainer",
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update 'UBUNTU_VARIANT' to pick an Ubuntu OS version. Options: [focal, jammy, lunar, noble]. Default: noble
-		// Update 'GCC_VER' to pick a gcc and g++ version. Options: [7, 8, 9, 10, 11, 12, 13]. Default: 13
-		// Update 'LLVM_VER' to pick clang version. Options: [10, 11, 12, 13, 14, 15, 16, 17, 18]. Default: 18
+		// Update 'UBUNTU_VARIANT' to pick an Ubuntu OS version. Options: [focal, jammy, lunar, noble, plucky]. Default: plucky
+		// Update 'GCC_VER' to pick a gcc and g++ version. Options: [7, 8, 9, 10, 11, 12, 13, 14, 15]. Default: 15
+		// Update 'LLVM_VER' to pick clang version. Options: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]. Default: 19
+		// Note: The GCC and LLVM versions are not guaranteed to be available in all Ubuntu
 		// Update 'INSTALL_CONAN' to install Conan inside the devcontainer. Options: "true"/"false"
 		// Update 'INSTALL_DOXYGEN' to install Doxygen inside the devcontainer. Options: "true"/"false"
 		"args": {
-			"UBUNTU_VARIANT": "noble",
-			"GCC_VER": "13",
-			"LLVM_VER": "18",
+			"UBUNTU_VARIANT": "plucky",
+			"GCC_VER": "15",
+			"LLVM_VER": "19",
+			"INSTALL_IWYU": "false",
 			"INSTALL_CONAN": "true",
 			"INSTALL_DOXYGEN": "false"
 		}
 	},
+	"mounts": [
+		"source=${env:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached",
+		"source=${env:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+	],
 	// Use 'settings' to set *default* container specific settings.json values on container create.
 	// You can edit these settings after create using File > Preferences > Settings > Remote.
 	"customizations": {
@@ -35,16 +41,11 @@
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"ms-vscode.cpptools-extension-pack",
-				"cschlosser.doxdocgen",
 				"eamodio.gitlens",
 				"mhutchie.git-graph",
 				"hediet.vscode-drawio",
-				"ms-python.python",
-				"ms-python.vscode-pylance",
 				"mutantdino.resourcemonitor",
-				"matepek.vscode-catch2-test-adapter",
 				"shardulm94.trailing-spaces",
-				"Guyutongxue.cpp-reference"
 			]
 		}
 	},
@@ -56,10 +57,5 @@
 	//"remoteUser": "vscode",
 	// Workspace Configuration
 	"workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=delegated",
-	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-	"features": {
-		"git": "latest",
-		"git-lfs": "latest",
-		"powershell": "latest"
-	}
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
 }
