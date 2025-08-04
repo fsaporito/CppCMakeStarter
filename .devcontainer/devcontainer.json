@@ -16,12 +16,16 @@
 			"LLVM_VER": "19",
 			"INSTALL_IWYU": "true",
 			"INSTALL_CONAN": "true",
-			"INSTALL_DOXYGEN": "false"
+			"INSTALL_DOXYGEN": "false",
+			"FORWARD_LOCAL_USER": "false",
+			"USERNAME": "${localEnv:USER}",
+			"USER_UID": "1000",
+			"USER_GID": "1000"
 		}
 	},
 	"mounts": [
-		"source=${env:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached",
-		"source=${env:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+		"source=${env:HOME}/.gitconfig,target=/home/${localEnv:USER}/.gitconfig,type=bind,consistency=cached",
+		"source=${env:HOME}/.ssh,target=/home/${localEnv:USER}/.ssh,type=bind,consistency=cached"
 	],
 	// Use 'settings' to set *default* container specific settings.json values on container create.
 	// You can edit these settings after create using File > Preferences > Settings > Remote.
@@ -54,7 +58,8 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	//"postCreateCommand": "uname -a",
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode",
+	// "remoteUser": "${localEnv:USER}",
+	"remoteUser": "ubuntu",
 	// Workspace Configuration
 	"workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=delegated",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"

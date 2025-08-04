@@ -1,11 +1,27 @@
 # Ubuntu Version: plucky - 25.04
 ARG UBUNTU_VARIANT="plucky"
-FROM ubuntu:${UBUNTU_VARIANT}
 
+FROM ubuntu:${UBUNTU_VARIANT}
 
 # Restate the variant to use it later on in the llvm and cmake installations
 ARG UBUNTU_VARIANT
 
+# Create a user matching your host user
+ARG USERNAME
+ARG USER_UID
+ARG USER_GID
+ARG FORWARD_LOCAL_USER
+RUN if [ "${FORWARD_LOCAL_USER}" = "true" ]; then \
+    echo "User: $USERNAME, UID: $USER_UID, GID: $USER_GID"; \
+    touch /var/mail/ubuntu && chown ubuntu /var/mail/ubuntu; \
+    userdel -r ubuntu || true; \
+    if ! getent group $USER_GID >/dev/null; then \
+    groupadd --gid $USER_GID $USERNAME; \
+    fi; \
+    useradd --uid $USER_UID --gid $USER_GID -m -s /bin/bash $USERNAME; \
+    echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME; \
+    chmod 0440 /etc/sudoers.d/$USERNAME; \
+    fi
 
 # Run apt-get update
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive
@@ -126,12 +142,12 @@ RUN if [[ "${INSTALL_DOXYGEN}" == "true" ]]; then \
 # Install include-what-you-use, a tool for managing C++ headers
 # https://github.com/include-what-you-use/include-what-you-use
 # The last two commands (`mkdir` and `ln -s`) are to ensure that the Clang include directory is
-# available in the expected location for IWYU to function correctly 
+# available in the expected location for IWYU to function correctly
 # as explained at https://github.com/include-what-you-use/include-what-you-use#how-to-install:
 # `You need to copy the Clang include directory to the expected location before
 #  running (similarly, use include-what-you-use -print-resource-dir to learn
 #  exactly where IWYU wants the headers).`
-ARG INSTALL_IWYU=false
+ARG INSTALL_IWYU=true
 ENV IWYU=/home/iwyu
 ENV IWYU_BUILD=${IWYU}/build
 ENV IWYU_SRC=${IWYU}/include-what-you-use
