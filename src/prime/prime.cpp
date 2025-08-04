@@ -1,7 +1,7 @@
 #include "prime.h"
 #include <cmath>
 
-bool prime::isPrime(const int primeNumber)
+bool prime::isPrime(int primeNumber)
 {
 
     if (primeNumber <= 1)

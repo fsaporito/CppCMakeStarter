@@ -2,5 +2,5 @@
 
 namespace prime
 {
-    bool isPrime(const int primeNumber);
+    [[nodiscard]] bool isPrime(int primeNumber);
 }

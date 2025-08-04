@@ -1,6 +1,6 @@
 #include "factorial.h"
 
-int factorial::computeFact(const int factorialNumber)
+int factorial::computeFact(int factorialNumber)
 {
 
     if (factorialNumber == 0)

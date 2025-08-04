@@ -2,5 +2,5 @@
 
 namespace factorial
 {
-    int computeFact(const int factorialNumber);
+    [[nodiscard]] int computeFact(int factorialNumber);
 }
