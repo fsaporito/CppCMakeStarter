@@ -6,9 +6,6 @@ include(cmake/CPM.cmake)
 function(setup_CPM_dependencies)
     # For each dependency, see if it's
     # already been provided to us by a parent project
-    if(NOT TARGET fmtlib::fmtlib)
-        cpmaddpackage("gh:fmtlib/fmt#9.1.0")
-    endif()
 
     if(NOT TARGET spdlog::spdlog)
         cpmaddpackage(
@@ -19,7 +16,8 @@ function(setup_CPM_dependencies)
             GITHUB_REPOSITORY
             "gabime/spdlog"
             OPTIONS
-            "SPDLOG_FMT_EXTERNAL ON")
+            "SPDLOG_USE_STD_FORMAT ON"
+            )
     endif()
 
     if(NOT TARGET CLI11::CLI11)
