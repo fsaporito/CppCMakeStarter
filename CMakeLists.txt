@@ -47,7 +47,7 @@ message("-- Optimization Settings: " ${OPTIMIZATION_SETTINGS})
 message("-- Address Sanitizer is Active: " ${SANITIZER_ADDRESS})
 message("-- Undefined Behaviour is Active: " ${SANITIZER_UNDEFINED})
 message("-- Leak Sanitizer is Active: " ${SANITIZER_LEAK})
-message("-- Thread SAnitizer is Active: " ${SANITIZER_THREAD})
+message("-- Thread Sanitizer is Active: " ${SANITIZER_THREAD})
 enable_static_analysis(SANITIZER_ADDRESS SANITIZER_UNDEFINED SANITIZER_LEAK
   SANITIZER_THREAD)
 if (SANITIZER_COMPILER_FLAGS)
