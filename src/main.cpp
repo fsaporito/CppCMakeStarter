@@ -14,10 +14,10 @@ int main(int argc, const char** argv)
 
     CLI::App app{"My App"};
 
-    std::optional<int> factorialNumberInput = 0;
+    std::optional<size_t> factorialNumberInput = std::nullopt;
     app.add_option("--factorial", factorialNumberInput, "Factorial to Compute");
 
-    std::optional<int> primeNumberInput = 0;
+    std::optional<int> primeNumberInput = std::nullopt;
     app.add_option("--prime", primeNumberInput, "Check if number is prime");
 
 
@@ -30,29 +30,41 @@ int main(int argc, const char** argv)
         return app.exit(e);
     }
 
-    if (factorialNumberInput)
+    if (factorialNumberInput.has_value())
     {
-        if (factorialNumberInput < 0)
+        auto factorialNumberInputValue = factorialNumberInput.value();
+
+        if (factorialNumberInputValue < 0)
         {
-            std::cerr << "Cannot compute the factorial of a negative number"
-                      << "\n";
+            spdlog::error("Cannot compute the factorial of a negative number {}", factorialNumberInputValue);
+            return 1;
         }
 
-        const int fact = factorial::computeFact(factorialNumberInput.value());
-        std::cout << "Factorial of  " << factorialNumberInput.value() << " is: " << fact << "\n";
+        try
+        {
+            const auto fact = factorial::computeFact(factorialNumberInputValue);
+            spdlog::info("Factorial of {} is: {}", factorialNumberInputValue, fact);
+        } catch (const std::exception& e)
+        {
+            spdlog::error("Error computing factorial of {}: {}", factorialNumberInputValue, e.what());
+            return 1;
+        }
+
+        return 0;
     }
 
     // Prime
-    if (primeNumberInput)
+    if (primeNumberInput.has_value())
     {
-        const bool prime = prime::isPrime(primeNumberInput.value());
-        std::cout << primeNumberInput.value() << " is";
-        if (!prime)
-            std::cout << " not ";
-        std::cout << " Prime"
-                  << "\n";
+        auto       primeNumberInputValue = primeNumberInput.value();
+        const auto is_prime              = prime::isPrime(primeNumberInputValue);
+
+        spdlog::info("{} is {}", primeNumberInputValue, is_prime ? "Prime" : "Not Prime");
+
+        return 0;
     }
 
+    spdlog::error("No Option Given");
 
-    return 0;
+    return 1;
 }

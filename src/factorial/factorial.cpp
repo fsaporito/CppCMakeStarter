@@ -1,7 +1,13 @@
 #include "factorial.h"
+#include <stdexcept>
 
-int factorial::computeFact(int factorialNumber)
+size_t factorial::computeFact(size_t factorialNumber)
 {
+
+    if (factorialNumber > 20)
+    {
+        throw std::out_of_range("Factorial number is too large to compute safely.");
+    }
 
     if (factorialNumber == 0)
     {
