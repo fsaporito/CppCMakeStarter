@@ -1,0 +1,225 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 21,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "base-env",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "ENABLE_CPM": "ON",
+                "ENABLE_CONAN": "OFF"
+            }
+        },
+        {
+            "name": "compiler-gcc",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "gcc",
+                "CMAKE_CXX_COMPILER": "g++"
+            }
+        },
+        {
+            "name": "compiler-clang",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++"
+            }
+        },
+        {
+            "name": "mode-test",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "ENABLE_TESTING": "ON"
+            }
+        },
+        {
+            "name": "mode-deploy",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "ENABLE_TESTING": "OFF"
+            }
+        },
+        {
+            "name": "qa-static-analysis",
+            "hidden": true,
+            "cacheVariables": {
+                "STATIC_ANALYZER_CLANG_TIDY": "ON",
+                "STATIC_ANALYZER_CPPCHECK": "ON"
+            }
+        },
+        {
+            "name": "qa-asan",
+            "hidden": true,
+            "cacheVariables": {
+                "SANITIZER_ADDRESS": "ON",
+                "SANITIZER_UNDEFINED": "ON",
+                "SANITIZER_LEAK": "ON"
+            }
+        },
+        {
+            "name": "qa-tsan",
+            "hidden": true,
+            "cacheVariables": {
+                "SANITIZER_THREAD": "ON"
+            }
+        },
+        {
+            "name": "gcc-test",
+            "displayName": "GCC: Debug Test Build",
+            "description": "Standard Debug build with testing enabled.",
+            "inherits": [
+                "base-env",
+                "compiler-gcc",
+                "mode-test"
+            ]
+        },
+        {
+            "name": "gcc-test-analysis",
+            "displayName": "GCC: Debug Test + Static Analysis",
+            "description": "Debug build with testing and static analysis tools.",
+            "inherits": [
+                "base-env",
+                "compiler-gcc",
+                "mode-test",
+                "qa-static-analysis"
+            ]
+        },
+        {
+            "name": "gcc-test-asan",
+            "displayName": "GCC: Debug Test + ASan (Address/Leak)",
+            "description": "Debug build with tests and Address/Undefined/Leak Sanitizers.",
+            "inherits": [
+                "base-env",
+                "compiler-gcc",
+                "mode-test",
+                "qa-asan"
+            ]
+        },
+        {
+            "name": "gcc-test-tsan",
+            "displayName": "GCC: Debug Test + TSan (Thread)",
+            "description": "Debug build with tests and Thread Sanitizer.",
+            "inherits": [
+                "base-env",
+                "compiler-gcc",
+                "mode-test",
+                "qa-tsan"
+            ]
+        },
+        {
+            "name": "clang-test",
+            "displayName": "Clang: Debug Test Build",
+            "description": "Standard Debug build with testing enabled.",
+            "inherits": [
+                "base-env",
+                "compiler-clang",
+                "mode-test"
+            ]
+        },
+        {
+            "name": "clang-test-analysis",
+            "displayName": "Clang: Debug Test + Static Analysis",
+            "description": "Debug build with testing and static analysis tools.",
+            "inherits": [
+                "base-env",
+                "compiler-clang",
+                "mode-test",
+                "qa-static-analysis"
+            ]
+        },
+        {
+            "name": "clang-test-asan",
+            "displayName": "Clang: Debug Test + ASan (Address/Leak)",
+            "description": "Debug build with tests and Address/Undefined/Leak Sanitizers.",
+            "inherits": [
+                "base-env",
+                "compiler-clang",
+                "mode-test",
+                "qa-asan"
+            ]
+        },
+        {
+            "name": "clang-test-tsan",
+            "displayName": "Clang: Debug Test + TSan (Thread)",
+            "description": "Debug build with tests and Thread Sanitizer.",
+            "inherits": [
+                "base-env",
+                "compiler-clang",
+                "mode-test",
+                "qa-tsan"
+            ]
+        },
+        {
+            "name": "gcc-deploy",
+            "displayName": "GCC: Release Deploy Build",
+            "description": "Release profile optimized for production. No tests, no analysis.",
+            "inherits": [
+                "base-env",
+                "compiler-gcc",
+                "mode-deploy"
+            ]
+        },
+        {
+            "name": "clang-deploy",
+            "displayName": "Clang: Release Deploy Build",
+            "description": "Release profile optimized for production. No tests, no analysis.",
+            "inherits": [
+                "base-env",
+                "compiler-clang",
+                "mode-deploy"
+            ]
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "gcc-test",
+            "configurePreset": "gcc-test"
+        },
+        {
+            "name": "gcc-test-analysis",
+            "configurePreset": "gcc-test-analysis"
+        },
+        {
+            "name": "gcc-test-asan",
+            "configurePreset": "gcc-test-asan"
+        },
+        {
+            "name": "gcc-test-tsan",
+            "configurePreset": "gcc-test-tsan"
+        },
+        {
+            "name": "clang-test",
+            "configurePreset": "clang-test"
+        },
+        {
+            "name": "clang-test-analysis",
+            "configurePreset": "clang-test-analysis"
+        },
+        {
+            "name": "clang-test-asan",
+            "configurePreset": "clang-test-asan"
+        },
+        {
+            "name": "clang-test-tsan",
+            "configurePreset": "clang-test-tsan"
+        },
+        {
+            "name": "gcc-deploy",
+            "configurePreset": "gcc-deploy"
+        },
+        {
+            "name": "clang-deploy",
+            "configurePreset": "clang-deploy"
+        }
+    ]
+}
