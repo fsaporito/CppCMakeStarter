@@ -188,6 +188,14 @@ RUN if [[ "${INSTALL_CONAN}" == "true" ]] ; then \
     echo "Conan not installed by user configuration"; \
     fi
 
+# Install D2 for diagrams
+ARG INSTALL_D2=true
+RUN if [[ "${INSTALL_D2}" == "true" ]] ; then \
+    curl -fsSL https://d2lang.com/install.sh | sh -s -- \
+    else \
+    echo "Conan not installed by user configuration"; \
+    fi
+
 
 ## Cleanup cached apt data
 RUN export DEBIAN_FRONTEND=noninteractive \

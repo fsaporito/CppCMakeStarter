@@ -10,6 +10,7 @@
 		// Note: The GCC and LLVM versions are not guaranteed to be available in all Ubuntu
 		// Update 'INSTALL_CONAN' to install Conan inside the devcontainer. Options: "true"/"false"
 		// Update 'INSTALL_DOXYGEN' to install Doxygen inside the devcontainer. Options: "true"/"false"
+		// Update 'INSTALL_D2' to install D2 inside the devcontainer. Options: "true"/"false"
 		"args": {
 			"UBUNTU_VARIANT": "plucky",
 			"GCC_VER": "15",
@@ -17,6 +18,7 @@
 			"INSTALL_IWYU": "true",
 			"INSTALL_CONAN": "true",
 			"INSTALL_DOXYGEN": "false",
+			"INSTALL_D2": "true",
 			"FORWARD_LOCAL_USER": "false",
 			"USERNAME": "${localEnv:USER}",
 			"USER_UID": "1000",
@@ -49,7 +51,10 @@
 				"mhutchie.git-graph",
 				"hediet.vscode-drawio",
 				"mutantdino.resourcemonitor",
-				"shardulm94.trailing-spaces"
+				"shardulm94.trailing-spaces",
+				"shd101wyy.markdown-preview-enhanced",
+				"terrastruct.d2",
+				"brucermckay.d2-in-markdown"
 			]
 		}
 	},
