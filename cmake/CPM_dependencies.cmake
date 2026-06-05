@@ -16,6 +16,6 @@ function(setup_CPM_dependencies)
     endif()
 
     if(NOT TARGET Catch2::Catch2WithMain)
-        cpmaddpackage("gh:catchorg/Catch2@3.9.0")
+        cpmaddpackage("gh:catchorg/Catch2@3.15.0")
     endif()
 endfunction()
