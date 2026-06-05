@@ -8,16 +8,7 @@ function(setup_CPM_dependencies)
     # already been provided to us by a parent project
 
     if(NOT TARGET spdlog::spdlog)
-        cpmaddpackage(
-            NAME
-            spdlog
-            VERSION
-            1.15.0
-            GITHUB_REPOSITORY
-            "gabime/spdlog"
-            OPTIONS
-            "SPDLOG_USE_STD_FORMAT ON"
-            )
+        cpmaddpackage("gh:gabime/spdlog@1.17.0")
     endif()
 
     if(NOT TARGET CLI11::CLI11)
