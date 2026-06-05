@@ -12,7 +12,7 @@ function(setup_CPM_dependencies)
     endif()
 
     if(NOT TARGET CLI11::CLI11)
-        cpmaddpackage("gh:CLIUtils/CLI11@2.5.0")
+        cpmaddpackage("gh:CLIUtils/CLI11@2.6.2")
     endif()
 
     if(NOT TARGET Catch2::Catch2WithMain)
