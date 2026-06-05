@@ -34,17 +34,12 @@ int main(int argc, const char** argv)
     {
         auto factorialNumberInputValue = factorialNumberInput.value();
 
-        if (factorialNumberInputValue < 0)
-        {
-            spdlog::error("Cannot compute the factorial of a negative number {}", factorialNumberInputValue);
-            return 1;
-        }
-
         try
         {
             const auto fact = factorial::computeFact(factorialNumberInputValue);
             spdlog::info("Factorial of {} is: {}", factorialNumberInputValue, fact);
-        } catch (const std::exception& e)
+        }
+        catch (const std::exception& e)
         {
             spdlog::error("Error computing factorial of {}: {}", factorialNumberInputValue, e.what());
             return 1;
