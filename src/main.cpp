@@ -59,7 +59,9 @@ int main(int argc, const char** argv)
         return 0;
     }
 
-    spdlog::error("No Option Given");
+    spdlog::error("No Command Line Option Given");
+
+    spdlog::info(app.help());
 
     return 1;
 }
