@@ -1,0 +1,101 @@
+# .pre-commit-config.yaml
+#
+# Install all hook types once:
+#   pre-commit install --install-hook-types pre-commit,commit-msg,pre-push
+
+default_install_hook_types: [pre-commit, commit-msg, pre-push]
+default_stages: [pre-commit]
+minimum_pre_commit_version: "3.5.0"
+
+repos:
+  # ---------- PRE-COMMIT: fast text hygiene ----------
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=1024]
+      - id: check-yaml
+      - id: check-json
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs   # ADDED: exec bit set -> must have shebang
+      - id: check-shebang-scripts-are-executable  # ADDED: has shebang -> must be exec
+
+  # ---------- PRE-COMMIT: C/C++ formatting ----------
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v19.1.0
+    hooks:
+      - id: clang-format
+        types_or: [c++, c]
+        args: [--style=file]
+
+  # ---------- PRE-COMMIT: CMake formatting (gersemi) ----------
+  - repo: https://github.com/BlankSpruce/gersemi
+    rev: 0.17.0
+    hooks:
+      - id: gersemi
+
+  # ---------- PRE-COMMIT: CMake linting (cmakelang) ----------
+  - repo: https://github.com/cheshirekow/cmake-format-precommit
+    rev: v0.6.13
+    hooks:
+      - id: cmake-lint                         # ADDED: lint only, not format
+        # disable formatting-style checks so it doesn't fight gersemi:
+        args: [--disabled-codes, C0301, C0303, C0307, --suppress-decorations]
+
+  # ---------- PRE-COMMIT: editorconfig + secrets ----------
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 3.0.3
+    hooks:
+      - id: editorconfig-checker
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks
+
+  # ---------- COMMIT-MSG: Conventional Commits ----------
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.6.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: [feat, fix, docs, refactor, test, build, ci, chore, perf, revert]
+
+  # ---------- LOCAL: heavier, tool-dependent checks ----------
+  - repo: local
+    hooks:
+      - id: clang-tidy
+        name: clang-tidy (changed files)
+        entry: clang-tidy
+        language: system
+        types_or: [c++, c]
+        args: [-p=build, --warnings-as-errors=*]
+        require_serial: true
+
+      - id: cppcheck
+        name: cppcheck
+        entry: cppcheck
+        language: system
+        types_or: [c++, c]
+        args:
+          - --enable=warning,performance,portability
+          - --error-exitcode=1
+          - --inline-suppr
+          - --std=c++20
+        stages: [pre-push]
+
+      - id: build-and-test
+        name: build + unit tests (ci-fast preset)
+        entry: >
+          bash -c '
+          cmake --preset ci-fast &&
+          cmake --build --preset ci-fast &&
+          ctest --preset ci-fast --output-on-failure --label-regex unit'
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]

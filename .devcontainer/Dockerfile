@@ -46,6 +46,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     software-properties-common \
     wget
 
+# Install Git Precomit hook
+RUN pip install pre-commit
 
 # Add toolchain repo for downloading the wanted version of gcc and g++
 RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test
@@ -72,7 +74,6 @@ RUN CMAKE_PKG="${UBUNTU_VARIANT}" ; \
 # Run apt-get update
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive
 
-
 # Install gcc, g++ and gdb
 ARG GCC_VER="15"
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -84,7 +85,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 # Set gcc-${GCC_VER} as default gcc (Using toolchain's repo)
 RUN update-alternatives --install /usr/bin/gcc gcc $(which gcc-${GCC_VER}) 100
 RUN update-alternatives --install /usr/bin/g++ g++ $(which g++-${GCC_VER}) 100
-
 
 # Install clang, lldb and clang-tidy (Using llvm's repo)
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -103,7 +103,6 @@ RUN update-alternatives --install /usr/bin/clang++ clang++ $(which clang++-${LLV
 
 # Set the default clang-tidy, so CMake can find it
 RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy $(which clang-tidy-${LLVM_VER}) 1
-
 
 # Install common build tools
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -193,7 +192,7 @@ ARG INSTALL_D2=true
 RUN if [[ "${INSTALL_D2}" == "true" ]] ; then \
     curl -fsSL https://d2lang.com/install.sh | sh -s -- \
     else \
-    echo "Conan not installed by user configuration"; \
+    echo "D2 not installed by user configuration"; \
     fi
 
 

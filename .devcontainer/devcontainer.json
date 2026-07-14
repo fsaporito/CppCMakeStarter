@@ -44,18 +44,17 @@
 				"trailing-spaces.trimOnSave": true,
 				"workbench.editor.highlightModifiedTabs": true,
 				"C_Cpp.intelliSenseEngine": "disabled", // We use clangd for intellisense, so disable the default C/C++ extension engine
-                "clangd.arguments": [
-                    "--background-index",
-                    "--clang-tidy",
-                    "--header-insertion=iwyu",
-                    "--completion-style=detailed"
-                ],
-                "cmake.options.statusBarVisibility": "visible"
+				"clangd.arguments": [
+					"--background-index",
+					"--clang-tidy",
+					"--header-insertion=iwyu",
+					"--completion-style=detailed"
+				]
 			},
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"ms-vscode.cpptools-extension-pack",
-                "llvm-vs-code-extensions.vscode-clangd",
+				"llvm-vs-code-extensions.vscode-clangd",
 				"mhutchie.git-graph",
 				"hediet.vscode-drawio",
 				"mutantdino.resourcemonitor",
@@ -69,7 +68,7 @@
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Use 'postCreateCommand' to run commands after the container is created.
-	//"postCreateCommand": "uname -a",
+	"postCreateCommand": ".devcontainer/post_create.sh",
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "${localEnv:USER}",
 	"remoteUser": "ubuntu",
