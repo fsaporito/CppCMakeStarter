@@ -42,12 +42,20 @@
 				"editor.insertSpaces": true,
 				"editor.tabSize": 4,
 				"trailing-spaces.trimOnSave": true,
-				"workbench.editor.highlightModifiedTabs": true
+				"workbench.editor.highlightModifiedTabs": true,
+				"C_Cpp.intelliSenseEngine": "disabled", // We use clangd for intellisense, so disable the default C/C++ extension engine
+                "clangd.arguments": [
+                    "--background-index",
+                    "--clang-tidy",
+                    "--header-insertion=iwyu",
+                    "--completion-style=detailed"
+                ],
+                "cmake.options.statusBarVisibility": "visible"
 			},
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"ms-vscode.cpptools-extension-pack",
-				"eamodio.gitlens",
+                "llvm-vs-code-extensions.vscode-clangd",
 				"mhutchie.git-graph",
 				"hediet.vscode-drawio",
 				"mutantdino.resourcemonitor",
